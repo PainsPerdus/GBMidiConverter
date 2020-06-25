@@ -21,4 +21,16 @@ void convert(FILE* infile, FILE* outfile)
     printf("  Tracks : %hi\n",hd.tracks);
     printf("  BPM : %hi\n",hd.bpm);
     printf("\\\\---  Header  ---//\n");
+    for(int i = 0; i < hd.tracks; i++)
+    {
+        struct MTrk trk;
+        fread(&trk,sizeof(trk),1,infile);
+        printf("//--  Track %i  --\\\\\n", i);
+        printf("  Size : %i\n",trk.size);
+        for(int j = 0; j < trk.size; j++)
+        { 
+            head = getc(infile);
+        }
+        printf("\\\\--  Track %i  --//\n", i);
+    }
 }
