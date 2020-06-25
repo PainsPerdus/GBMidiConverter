@@ -27,10 +27,11 @@ void convert(FILE* infile, FILE* outfile)
         fread(&trk,sizeof(trk),1,infile);
         printf("//--  Track %i  --\\\\\n", i);
         printf("  Size : %i\n",trk.size);
-        for(int j = 0; j < trk.size; j++)
+        for(int j = 0; j < trk.size-3; j++)
         { 
             head = getc(infile);
         }
+        printf("%hhX %hhX %hhX \n",getc(infile),getc(infile),getc(infile));
         printf("\\\\--  Track %i  --//\n", i);
     }
 }
