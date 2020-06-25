@@ -14,3 +14,5 @@ struct MTrk {
     uint32_t magic;
     uint32_t size;
 };
+
+void convert(FILE* infile, FILE* outfile);
