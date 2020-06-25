@@ -62,24 +62,32 @@ void convert(FILE* infile, FILE* outfile)
                 {
                     case 0x90 : 
                         note = getc(infile);
-                            velo = getc(infile);
-                            printf("Note %hhX ON, delay : %i, channel : %hhi \n",note, delay, channel);
-                            ignore += 2;
-                            break;
-                        case 0x80 : 
-                            note = getc(infile);
-                            velo = getc(infile);
-                            printf("Note %hhX OFF, delay : %i, channel : %hhi \n",note, delay, channel);
-                            ignore += 2;
-                            break;
-                        default:
-                            printf("Event not known, delay : %i \n",delay);
-                            getc(infile);
-                            getc(infile);
-                            ignore += 2;
-                            break;
-                    } 
-                
+                        velo = getc(infile);
+                        printf("Note %hhX ON, delay : %i, channel : %hhi \n",note, delay, channel);
+                        ignore += 2;
+                        break;
+                    case 0x80 : 
+                        note = getc(infile);
+                        velo = getc(infile);
+                        printf("Note %hhX OFF, delay : %i, channel : %hhi \n",note, delay, channel);
+                        ignore += 2;
+                        break;
+                    case 0xC0 : 
+                        printf("Event not known, delay : %i \n",delay);
+                        ignore += 1;
+                        break;
+                    case 0xD0 : 
+                        printf("Event not known, delay : %i \n",delay);
+                        ignore += 1;
+                        break;
+                    default:
+                        printf("Event not known %hhX, delay : %i \n",function, delay);
+                        getc(infile);
+                        getc(infile);
+                        ignore += 2;
+                        break;
+                } 
+                delayMode = true;
             }
         }
         printf("%hhX %hhX %hhX \n",getc(infile),getc(infile),getc(infile));
